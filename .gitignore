@@ -1,0 +1,7 @@
+media/
+media/*
+
+apps/entries/migrations/
+apps/entries/migrations/*
+
+db.sqlite3
