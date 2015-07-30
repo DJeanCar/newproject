@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class TimeStampModel(models.Model):
 
@@ -19,6 +20,7 @@ class EntryQuerySet(models.QuerySet):
 
 class Entry(TimeStampModel):
 
+	user = models.ForeignKey(User, null=True, blank=True)
 	title = models.CharField(max_length=50)
 	content = models.TextField()
 	published = models.BooleanField(default = False)
@@ -36,3 +38,11 @@ class Entry(TimeStampModel):
 			return None
 		else:
 			return "http://localhost:8000/media/%s" % self.image
+
+
+class Comment(models.Model):
+	comment = models.TextField()
+	entry = models.ForeignKey(Entry, null=True, blank=True)
+
+	def __unicode__(self):
+		return self.entry.title

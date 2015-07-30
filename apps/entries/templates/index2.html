@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>AJAX Ejemplo2</h1>
+	<input type="text" name="title" class="title" placeholder="titulo">
+	<br><textarea name="content" class="area" cols="20" rows="10" placeholder="Contenido"></textarea>
+	<button id="btn">Crear</button>
+{% endblock content %}
+
+{% block scripts %}
+	<script>
+	$("#btn").on('click', submit);
+
+	function submit(){
+		$.ajax({
+			data : { title : $(".title").val(), content : $(".area").val() },
+			type : "POST",
+			url : "/guardar-entrada/",
+			success : function (data) {
+				console.log(data.message);
+			}
+		});	
+	};
+	</script>
+{% endblock scripts %}

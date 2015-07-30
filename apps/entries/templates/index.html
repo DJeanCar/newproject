@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+	<h1>AJAX!</h1>
+	<input type="email" name="email" id="email">
+	<button class="my_button">Presioname!!</button>
+	<div class="content">
+		
+	</div>
+{% endblock content %}
+
+{% block scripts %}
+	<script>
+		$('.my_button').on("click", clicked);
+
+		function clicked(){
+			$.ajax({
+				data : { email : $('#email').val()},
+				type : "POST",
+				url : "/ajax/",
+				success : function (data) {
+					var html = "";
+					for (var i = 0 ; i < data.length ; i++) {
+						html += data[i].title + "<br>"
+					};
+					$(".content").html("<h3>" + html + "</h3>");
+				}
+			});
+		}
+	</script>
+{% endblock scripts %}
+
+</body>
+</html>

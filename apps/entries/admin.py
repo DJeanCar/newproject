@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Entry
+from .models import Entry, Comment
 from .actions import make_published, export_as_excel
 
 @admin.register(Entry)
@@ -13,3 +13,7 @@ class EntryAdmin(admin.ModelAdmin):
 		tag = "<img src='%s' width='100px' >" % url
 		return tag
 	get_url_image.allow_tags = True
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+	pass
